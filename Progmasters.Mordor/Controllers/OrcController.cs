@@ -53,9 +53,16 @@ namespace Progmasters.Mordor.Controllers
         [HttpDelete("{id}")]
         public ActionResult<IEnumerable<OrcDetail>> Delete(int id)
         {
-            orcService.deleteOrc(id);
-            IEnumerable<OrcDetail> orcList = orcService.GetAll();
-            return Ok(orcList);
+            bool orcIsDeleted = orcService.deleteOrc(id);
+            if (orcIsDeleted)
+            {
+                IEnumerable<OrcDetail> orcList = orcService.GetAll();
+                return Ok(orcList);
+            }
+            else
+            {
+                return NotFound(id);
+            }
         }
     }
 }

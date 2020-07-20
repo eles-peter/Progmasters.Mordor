@@ -25,12 +25,12 @@ namespace Progmasters.Mordor.Services
 
         public void createOrc(OrcCreateItem orcCreateItem)
         {
-            throw new NotImplementedException();
+            orcRepository.saveOrc(mapper.Map<Orc>(orcCreateItem));
         }
 
-        public void deleteOrc(int id)
+        public bool deleteOrc(int id)
         {
-            throw new NotImplementedException();
+           return orcRepository.deleteOrc(id);
         }
 
         public IEnumerable<OrcDetail> GetAll()

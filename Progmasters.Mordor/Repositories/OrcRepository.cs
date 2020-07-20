@@ -34,6 +34,14 @@ namespace Progmasters.Mordor.Repositories
                 }
             }
         };
+
+        public bool deleteOrc(int id)
+        {
+            Orc orc = orcList.FirstOrDefault(orc => orc.Id == id);
+            if (orc != null) orcList.Remove(orc);
+            return orc != null;
+        }
+
         public List<Orc> getAll()
         {
             return orcList;
@@ -43,5 +51,12 @@ namespace Progmasters.Mordor.Repositories
         {
            return orcList.FirstOrDefault(orc => orc.Id == id);
         }
+
+        public void saveOrc(Orc orc)
+        {
+            orcList.Add(orc);
+        }
+
     }
 }
+

@@ -15,11 +15,10 @@ namespace Progmasters.Mordor
         {
             CreateMap<Orc, OrcDetail>();
             CreateMap<OrcCreateItem, Orc>();
-            CreateMap<OrcRaceType, OrcRaceTypeDto>();
-            CreateMap<OrcRaceTypeDto, OrcRaceType>();
-            CreateMap<WeaponType, WeaponTypeDto>();
-            CreateMap<WeaponTypeDto, WeaponType>();
-
+            CreateMap<string, OrcRaceType>().
+                ConvertUsing<StringToOrcRaceTypeConverter>();
+            CreateMap<string, WeaponType>().
+                ConvertUsing<StringToWeaponTypeConverter>();
         }
             
 

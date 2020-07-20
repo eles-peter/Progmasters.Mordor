@@ -22,6 +22,12 @@ namespace Progmasters.Mordor.Controllers
             this.logger = logger;
         }
 
+        [HttpGet("formData")]
+        public ActionResult<OrcFormData> GetOrcFornData()
+        {
+            return Ok(orcService.getOrcFormData());
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<OrcDetail>> Get()
         {

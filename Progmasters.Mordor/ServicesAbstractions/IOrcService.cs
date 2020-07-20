@@ -13,5 +13,6 @@ namespace Progmasters.Mordor.ServicesAbstractions
         void createOrc(OrcCreateItem orcCreateItem);
         void updateOrc(int id, OrcCreateItem orcCreateItem);
         bool deleteOrc(int id);
+        OrcFormData getOrcFormData();
     }
 }

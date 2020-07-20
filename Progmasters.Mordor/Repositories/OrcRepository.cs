@@ -30,7 +30,7 @@ namespace Progmasters.Mordor.Repositories
                 {
                     WeaponType.Bow,
                     WeaponType.Sword,
-                    WeaponType.Shiled
+                    WeaponType.Shield
                 }
             }
         };

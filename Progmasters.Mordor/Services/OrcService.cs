@@ -23,6 +23,14 @@ namespace Progmasters.Mordor.Services
             this.mapper = mapper;
         }
 
+        public OrcFormData getOrcFormData()
+        {
+           return new OrcFormData { 
+           WeaponOption = WeaponType.WeaponTypes.Select(w => w.ToString()).ToList(),
+           OrcRaceTypeOption = OrcRaceType.OrcRaceTypes.Select(o => o.ToString()).ToList()
+           };
+        }
+
         public void createOrc(OrcCreateItem orcCreateItem)
         {
             orcRepository.saveOrc(mapper.Map<Orc>(orcCreateItem));

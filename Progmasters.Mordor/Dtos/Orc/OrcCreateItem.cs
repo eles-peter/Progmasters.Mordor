@@ -9,9 +9,9 @@ namespace Progmasters.Mordor.Dtos.Orc
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public OrcRaceTypeDto OrcRaceType { get; set; }
+        public string OrcRaceType { get; set; }
         public int KillCount { get; set; }
-        public List<WeaponTypeDto> Weapons { get; set; }
+        public List<string> Weapons { get; set; }
     }
 }
 

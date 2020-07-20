@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Progmasters.Mordor.Repositories;
+using Progmasters.Mordor.RepositoriesAbstractions;
+using Progmasters.Mordor.Services;
+using Progmasters.Mordor.ServicesAbstractions;
 
 namespace Progmasters.Mordor
 {
@@ -26,6 +31,9 @@ namespace Progmasters.Mordor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<IOrcService, OrcService>();
+            services.AddTransient<IOrcRepository, OrcRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

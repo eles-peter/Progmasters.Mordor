@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Progmasters.Mordor.Models
+namespace Progmasters.Mordor.Dtos.Orc
 {
-    public class Orc
+    public class OrcCreateItem
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public OrcRaceType OrcRaceType { get; set; }
+        public OrcRaceTypeDto OrcRaceType { get; set; }
         public int KillCount { get; set; }
-        public List<WeaponType> Weapons { get; set; }
+        //public List<WeaponTypeDto> Weapons { get; set; }
     }
-
-
 }
+

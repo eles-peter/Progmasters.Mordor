@@ -54,9 +54,24 @@ namespace Progmasters.Mordor.Services
             return mapper.Map<OrcDetail>(orc);
         }
 
-        public void updateOrc(int id, OrcCreateItem orcCreateItem)
+        public OrcDetail updateOrc(int id, OrcCreateItem orcCreateItem)
         {
-            throw new NotImplementedException();
+            Orc orc = mapper.Map<Orc>(orcCreateItem);
+            orc.Id = id;
+
+            //Orc orc = orcRepository.getOrc(id);
+            //OrcDetail updatedOrc = null;
+            //if (orc != null)
+            //{
+            //    orc.Name = orcCreateItem.Name;
+
+            //    orc.KillCount = orcCreateItem.KillCount;
+            //    orc.
+
+            //}
+
+            Orc updatedOrc = orcRepository.Update(id, orc);
+            return mapper.Map<OrcDetail>(updatedOrc);
         }
     }
 }

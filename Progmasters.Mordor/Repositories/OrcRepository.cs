@@ -59,14 +59,15 @@ namespace Progmasters.Mordor.Repositories
 
         public List<Orc> getAll()
         {
-            List<DbOrc> dbOrcs = context.Orcs.ToList();
-            //List<DbOrc> dbOrcs = context.Orcs.Include(o => o.Weapons).ToList();
+            List<DbOrc> dbOrcs = context.Orcs.Include(o => o.Weapons).ToList();
             return dbOrcs.Select(dbOrc => mapper.Map<Orc>(dbOrc)).ToList();
         }
 
         public Orc getOrc(int id)
         {
-            DbOrc dbOrc = context.Orcs.FirstOrDefault(dbOrc => dbOrc.Id == id);
+            DbOrc dbOrc = context.Orcs
+                .Include(o => o.Weapons)
+                .FirstOrDefault(dbOrc => dbOrc.Id == id);
             return mapper.Map<Orc>(dbOrc);
         }
 
@@ -77,6 +78,16 @@ namespace Progmasters.Mordor.Repositories
             context.SaveChanges();
         }
 
+        public Orc Update(int id, Orc updatedOrc)
+        {
+            DbOrc dbOrc = context.Orcs.Include(o => o.Weapons).FirstOrDefault(o => o.Id == id);
+            if (dbOrc != null)
+            {
+                context.Entry(dbOrc).CurrentValues.SetValues(mapper.Map<DbOrc>(updatedOrc));
+                context.SaveChanges();
+            }
+            return mapper.Map<Orc>(dbOrc);
+        }
     }
 }
 

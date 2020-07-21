@@ -47,15 +47,15 @@ namespace Progmasters.Mordor.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("DbOrcId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Weapons")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("Weapons");
+                    b.HasIndex("DbOrcId");
 
                     b.ToTable("Weapons");
                 });
@@ -64,7 +64,7 @@ namespace Progmasters.Mordor.Migrations
                 {
                     b.HasOne("Progmasters.Mordor.Repositories.Entities.DbOrc", null)
                         .WithMany("Weapons")
-                        .HasForeignKey("Weapons");
+                        .HasForeignKey("DbOrcId");
                 });
 #pragma warning restore 612, 618
         }

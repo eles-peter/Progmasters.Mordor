@@ -50,13 +50,20 @@ namespace Progmasters.Mordor.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<int> Update(int id, [FromBody] OrcCreateItem orcCreateItem)
+        public ActionResult<OrcDetail> Update(int id, [FromBody] OrcCreateItem orcCreateItem)
         {
-            orcService.updateOrc(id, orcCreateItem);
-            return Ok(orcService.getOrc(id));
+            OrcDetail updatedOrc = orcService.updateOrc(id, orcCreateItem);
+            if (updatedOrc != null) 
+            {
+                return Ok(updatedOrc);
+            } 
+            else
+            {
+                return NotFound();
+            }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")] 
         public ActionResult<IEnumerable<OrcDetail>> Delete(int id)
         {
             bool orcIsDeleted = orcService.deleteOrc(id);

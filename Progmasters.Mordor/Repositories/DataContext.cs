@@ -17,7 +17,6 @@ namespace Progmasters.Mordor.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
         }
 
     }

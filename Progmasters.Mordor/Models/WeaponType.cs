@@ -37,7 +37,7 @@ namespace Progmasters.Mordor.Models
             {
                 if (weaponType.Value == value) return weaponType;
             }
-            throw new FormatException("Could not parse string.");
+            throw new FormatException("Invalid weapon type.");
         }
 
         public override string ToString()
@@ -46,13 +46,6 @@ namespace Progmasters.Mordor.Models
         }
     }
 
-    public class StringToWeaponTypeConverter : ITypeConverter<string, WeaponType>
-    {
-        public WeaponType Convert(string source, WeaponType destination, ResolutionContext context)
-        {
-            return WeaponType.Parse(source);
-        }
-    }
 }
 
 

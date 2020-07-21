@@ -21,9 +21,9 @@ namespace Progmasters.Mordor
             CreateMap<WeaponType, DbWeapon>();
             CreateMap<DbWeapon, WeaponType>();
             CreateMap<string, OrcRaceType>().
-                ConvertUsing<StringToOrcRaceTypeConverter>();
+                ConvertUsing(s => OrcRaceType.Parse(s));
             CreateMap<string, WeaponType>().
-                ConvertUsing<StringToWeaponTypeConverter>();
+                ConvertUsing(s => WeaponType.Parse(s));
         }
             
 

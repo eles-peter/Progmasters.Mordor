@@ -12,7 +12,6 @@ namespace Progmasters.Mordor.Repositories.Entities
         public string Name { get; set; }
         public string OrcRaceType { get; set; }
         public int KillCount { get; set; }
-        [ForeignKey("Weapons")]
         public List<DbWeapon> Weapons { get; set; }
     }
 }

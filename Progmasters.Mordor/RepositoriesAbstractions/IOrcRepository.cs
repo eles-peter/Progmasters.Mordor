@@ -1,4 +1,5 @@
-﻿using Progmasters.Mordor.Models;
+﻿using Progmasters.Mordor.Dtos.Orc;
+using Progmasters.Mordor.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Progmasters.Mordor.RepositoriesAbstractions
         Orc getOrc(int id);
         void saveOrc(Orc orc);
         bool deleteOrc(int id);
+        Orc Update(int id, Orc updatedOrc);
     }
 }

@@ -34,7 +34,7 @@ namespace Progmasters.Mordor.Models
             {
                 if (orcRaceType.Value == value) return orcRaceType;
             }
-            throw new FormatException("Could not parse string."); 
+            throw new FormatException("Invalid orc race."); 
         }
 
         public override string ToString()
@@ -43,11 +43,4 @@ namespace Progmasters.Mordor.Models
         }
     }
 
-    public class StringToOrcRaceTypeConverter : ITypeConverter<string, OrcRaceType>
-    {
-        public OrcRaceType Convert(string source, OrcRaceType destination, ResolutionContext context)
-        {
-            return OrcRaceType.Parse(source);
-        }
-    }
 }

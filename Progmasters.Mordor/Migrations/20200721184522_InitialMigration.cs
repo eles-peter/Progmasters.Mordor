@@ -2,7 +2,7 @@
 
 namespace Progmasters.Mordor.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,7 +38,7 @@ namespace Progmasters.Mordor.Migrations
                         column: x => x.DbOrcId,
                         principalTable: "Orcs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

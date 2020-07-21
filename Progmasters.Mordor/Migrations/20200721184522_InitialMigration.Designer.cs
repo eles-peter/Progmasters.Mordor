@@ -10,8 +10,8 @@ using Progmasters.Mordor.Repositories;
 namespace Progmasters.Mordor.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200721132758_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200721184522_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Progmasters.Mordor.Models;
+using Progmasters.Mordor.Repositories.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace Progmasters.Mordor.Repositories
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-        public DbSet<Orc> Orcs { get; set; }
-        public DbSet<WeaponType> Weapons { get; set; }
+        public DbSet<DbOrc> Orcs { get; set; }
+        public DbSet<DbWeapon> Weapons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

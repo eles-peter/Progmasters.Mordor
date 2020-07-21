@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Progmasters.Mordor.Dtos.Orc
+namespace Progmasters.Mordor.Repositories.Entities
 {
-    public class OrcCreateItem
+    public class DbOrc
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string OrcRaceType { get; set; }
         public int KillCount { get; set; }
-        public List<string> Weapons { get; set; }
+        [ForeignKey("Weapons")]
+        public List<DbWeapon> Weapons { get; set; }
     }
 }
-

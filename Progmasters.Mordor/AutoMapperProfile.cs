@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Progmasters.Mordor.Models;
 using Progmasters.Mordor.Dtos.Orc;
 using Progmasters.Mordor.Dtos;
+using Progmasters.Mordor.Repositories.Entities;
 
 namespace Progmasters.Mordor
 {
@@ -15,6 +16,10 @@ namespace Progmasters.Mordor
         {
             CreateMap<Orc, OrcDetail>();
             CreateMap<OrcCreateItem, Orc>();
+            CreateMap<DbOrc, Orc>();
+            CreateMap<Orc, DbOrc>();
+            CreateMap<WeaponType, DbWeapon>();
+            CreateMap<DbWeapon, WeaponType>();
             CreateMap<string, OrcRaceType>().
                 ConvertUsing<StringToOrcRaceTypeConverter>();
             CreateMap<string, WeaponType>().

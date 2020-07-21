@@ -1,4 +1,7 @@
-﻿using Progmasters.Mordor.Models;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Progmasters.Mordor.Models;
+using Progmasters.Mordor.Repositories.Entities;
 using Progmasters.Mordor.RepositoriesAbstractions;
 using System;
 using System.Collections.Generic;
@@ -34,27 +37,44 @@ namespace Progmasters.Mordor.Repositories
                 }
             }
         };
+        private readonly DataContext context;
+        private readonly IMapper mapper;
+
+        public OrcRepository(DataContext context, IMapper mapper)
+        {
+            this.context = context;
+            this.mapper = mapper;
+        }
 
         public bool deleteOrc(int id)
         {
-            Orc orc = orcList.FirstOrDefault(orc => orc.Id == id);
-            if (orc != null) orcList.Remove(orc);
-            return orc != null;
+            DbOrc dbOrc = context.Orcs.FirstOrDefault(orc => orc.Id == id);
+            if (dbOrc != null)
+            {
+                context.Remove(dbOrc);
+                context.SaveChanges();
+            }
+            return dbOrc != null;
         }
 
         public List<Orc> getAll()
         {
-            return orcList;
+            List<DbOrc> dbOrcs = context.Orcs.ToList();
+            //List<DbOrc> dbOrcs = context.Orcs.Include(o => o.Weapons).ToList();
+            return dbOrcs.Select(dbOrc => mapper.Map<Orc>(dbOrc)).ToList();
         }
 
         public Orc getOrc(int id)
         {
-           return orcList.FirstOrDefault(orc => orc.Id == id);
+            DbOrc dbOrc = context.Orcs.FirstOrDefault(dbOrc => dbOrc.Id == id);
+            return mapper.Map<Orc>(dbOrc);
         }
 
         public void saveOrc(Orc orc)
         {
-            orcList.Add(orc);
+            DbOrc dbOrc = mapper.Map<DbOrc>(orc);
+            context.Orcs.Add(dbOrc);
+            context.SaveChanges();
         }
 
     }

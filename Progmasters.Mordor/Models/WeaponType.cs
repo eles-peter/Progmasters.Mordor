@@ -9,7 +9,8 @@ namespace Progmasters.Mordor.Models
 {
     public class WeaponType
     {
-        public string Value { get; private set; }
+        public string Value { get; private set; }      
+
 
         private static List<WeaponType> weaponTypes = new List<WeaponType>();
 

@@ -12,6 +12,7 @@ namespace Progmasters.Mordor.Models
         public OrcRaceType OrcRaceType { get; set; }
         public int KillCount { get; set; }
         public List<WeaponType> Weapons { get; set; }
+        public Horde Horde { get; set; }
     }
 
 

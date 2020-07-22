@@ -11,6 +11,7 @@ namespace Progmasters.Mordor.Services
         public static void RegisterServiceDependencies(this IServiceCollection services)
         {
             services.AddTransient<IOrcService, OrcService>();
+            services.AddTransient<IHordeService, HordeService>();
         }
 
     }

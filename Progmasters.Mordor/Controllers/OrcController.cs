@@ -25,34 +25,32 @@ namespace Progmasters.Mordor.Controllers
         [HttpGet("formData")]
         public ActionResult<OrcFormData> GetOrcFornData()
         {
-            return Ok(orcService.getOrcFormData());
+            return Ok(orcService.GetOrcFormData());
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<OrcDetail>> Get()
+        public ActionResult<IEnumerable<OrcDetails>> Get()
         {
-            IEnumerable<OrcDetail> orcList = orcService.GetAll();
-            return Ok(orcList);
+            return Ok(orcService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<OrcDetail> Get(int id)
+        public ActionResult<OrcDetails> Get(int id)
         {
-            return Ok(orcService.getOrc(id));
+            return Ok(orcService.GetOrc(id));
         }
 
         [HttpPost]
         public ActionResult Create([FromBody] OrcCreateItem orcCreateItem)
         {
-            orcService.createOrc(orcCreateItem);
-
+            orcService.CreateOrc(orcCreateItem);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public ActionResult<OrcDetail> Update(int id, [FromBody] OrcCreateItem orcCreateItem)
+        public ActionResult<OrcDetails> Update(int id, [FromBody] OrcCreateItem orcCreateItem)
         {
-            OrcDetail updatedOrc = orcService.updateOrc(id, orcCreateItem);
+            OrcDetails updatedOrc = orcService.UpdateOrc(id, orcCreateItem);
             if (updatedOrc != null) 
             {
                 return Ok(updatedOrc);
@@ -64,12 +62,12 @@ namespace Progmasters.Mordor.Controllers
         }
 
         [HttpDelete("{id}")] 
-        public ActionResult<IEnumerable<OrcDetail>> Delete(int id)
+        public ActionResult<IEnumerable<OrcDetails>> Delete(int id)
         {
-            bool orcIsDeleted = orcService.deleteOrc(id);
+            bool orcIsDeleted = orcService.DeleteOrc(id);
             if (orcIsDeleted)
             {
-                IEnumerable<OrcDetail> orcList = orcService.GetAll();
+                IEnumerable<OrcDetails> orcList = orcService.GetAll();
                 return Ok(orcList);
             }
             else

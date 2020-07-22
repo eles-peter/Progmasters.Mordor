@@ -14,6 +14,7 @@ namespace Progmasters.Mordor.Repositories
 
         public DbSet<DbOrc> Orcs { get; set; }
         public DbSet<DbWeapon> Weapons { get; set; }
+        public DbSet<DbHorde> Hordes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

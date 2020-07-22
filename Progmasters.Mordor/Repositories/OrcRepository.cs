@@ -11,32 +11,6 @@ namespace Progmasters.Mordor.Repositories
 {
     public class OrcRepository : IOrcRepository
     {
-        private static List<Orc> orcList = new List<Orc>
-        {
-            new Orc{
-                Id = 1,
-                Name = "Ajsa",
-                OrcRaceType = OrcRaceType.Mountain,
-                KillCount = 5,
-                Weapons = new List<WeaponType>
-                {
-                    WeaponType.DoubleEdgeSword,
-                    WeaponType.Knife
-                }
-            },
-            new Orc{
-                Id = 2,
-                Name = "Pepa",
-                OrcRaceType = OrcRaceType.UrukHai,
-                KillCount = 8,
-                Weapons = new List<WeaponType>
-                {
-                    WeaponType.Bow,
-                    WeaponType.Sword,
-                    WeaponType.Shield
-                }
-            }
-        };
         private readonly DataContext context;
         private readonly IMapper mapper;
 
@@ -46,7 +20,7 @@ namespace Progmasters.Mordor.Repositories
             this.mapper = mapper;
         }
 
-        public bool deleteOrc(int id)
+        public bool DeleteOrc(int id)
         {
             DbOrc dbOrc = context.Orcs.FirstOrDefault(orc => orc.Id == id);
             if (dbOrc != null)
@@ -57,13 +31,13 @@ namespace Progmasters.Mordor.Repositories
             return dbOrc != null;
         }
 
-        public List<Orc> getAll()
+        public List<Orc> GetAll()
         {
             List<DbOrc> dbOrcs = context.Orcs.Include(o => o.Weapons).ToList();
             return dbOrcs.Select(dbOrc => mapper.Map<Orc>(dbOrc)).ToList();
         }
 
-        public Orc getOrc(int id)
+        public Orc GetOrc(int id)
         {
             DbOrc dbOrc = context.Orcs
                 .Include(o => o.Weapons)
@@ -71,7 +45,7 @@ namespace Progmasters.Mordor.Repositories
             return mapper.Map<Orc>(dbOrc);
         }
 
-        public void saveOrc(Orc orc)
+        public void SaveOrc(Orc orc)
         {
             DbOrc dbOrc = mapper.Map<DbOrc>(orc);
             context.Orcs.Add(dbOrc);

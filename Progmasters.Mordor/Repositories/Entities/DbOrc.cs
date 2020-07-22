@@ -13,5 +13,6 @@ namespace Progmasters.Mordor.Repositories.Entities
         public string OrcRaceType { get; set; }
         public int KillCount { get; set; }
         public List<DbWeapon> Weapons { get; set; }
+        public DbHorde Horde { get; set; }
     }
 }

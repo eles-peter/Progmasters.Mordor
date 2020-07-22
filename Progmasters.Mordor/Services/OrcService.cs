@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Progmasters.Mordor.Dtos.Horde;
 using Progmasters.Mordor.Dtos.Orc;
 using Progmasters.Mordor.Models;
 using Progmasters.Mordor.Repositories;
@@ -15,63 +16,59 @@ namespace Progmasters.Mordor.Services
     public class OrcService : IOrcService
     {
         private readonly IOrcRepository orcRepository;
+        private readonly IHordeRepository hordeRepository;
         private readonly IMapper mapper;
 
-        public OrcService(IOrcRepository orcRepository, IMapper mapper)
+        public OrcService(IOrcRepository orcRepository, IHordeRepository hordeRepository, IMapper mapper)
         {
             this.orcRepository = orcRepository;
+            this.hordeRepository = hordeRepository;
             this.mapper = mapper;
         }
 
-        public OrcFormData getOrcFormData()
+        public OrcFormData GetOrcFormData()
         {
-           return new OrcFormData { 
-           WeaponOption = WeaponType.WeaponTypes.Select(w => w.ToString()).ToList(),
-           OrcRaceTypeOption = OrcRaceType.OrcRaceTypes.Select(o => o.ToString()).ToList()
+            return new OrcFormData {
+                Weapons = WeaponType.WeaponTypes.Select(w => w.ToString()).ToList(),
+                OrcRaces = OrcRaceType.OrcRaceTypes.Select(o => o.ToString()).ToList(),
+                Hordes = hordeRepository.GetAll()
+                .Select(horde => mapper.Map<HordeListItem>(horde)).ToList()
            };
         }
 
-        public void createOrc(OrcCreateItem orcCreateItem)
+        public void CreateOrc(OrcCreateItem orcCreateItem)
         {
-            orcRepository.saveOrc(mapper.Map<Orc>(orcCreateItem));
+            Orc orc = mapper.Map<Orc>(orcCreateItem);
+            Horde hordeOfOrc = hordeRepository.GetHorde(orcCreateItem.HordeId);
+            orc.Horde = hordeOfOrc;
+            orcRepository.SaveOrc(orc);
         }
 
-        public bool deleteOrc(int id)
+        public bool DeleteOrc(int id)
         {
-           return orcRepository.deleteOrc(id);
+           return orcRepository.DeleteOrc(id);
         }
 
-        public IEnumerable<OrcDetail> GetAll()
+        public IEnumerable<OrcDetails> GetAll()
         {
-            List<Orc> orcList = orcRepository.getAll();
-            return orcList.Select(orc => mapper.Map<OrcDetail>(orc));
+            List<Orc> orcList = orcRepository.GetAll();
+            return orcList.Select(orc => mapper.Map<OrcDetails>(orc));
 
         }
 
-        public OrcDetail getOrc(int id)
+        public OrcDetails GetOrc(int id)
         {
-            Orc orc = orcRepository.getOrc(id);
-            return mapper.Map<OrcDetail>(orc);
+            Orc orc = orcRepository.GetOrc(id);
+            return mapper.Map<OrcDetails>(orc);
         }
 
-        public OrcDetail updateOrc(int id, OrcCreateItem orcCreateItem)
+        public OrcDetails UpdateOrc(int id, OrcCreateItem orcCreateItem)
         {
             Orc orc = mapper.Map<Orc>(orcCreateItem);
             orc.Id = id;
 
-            //Orc orc = orcRepository.getOrc(id);
-            //OrcDetail updatedOrc = null;
-            //if (orc != null)
-            //{
-            //    orc.Name = orcCreateItem.Name;
-
-            //    orc.KillCount = orcCreateItem.KillCount;
-            //    orc.
-
-            //}
-
             Orc updatedOrc = orcRepository.Update(id, orc);
-            return mapper.Map<OrcDetail>(updatedOrc);
+            return mapper.Map<OrcDetails>(updatedOrc);
         }
     }
 }

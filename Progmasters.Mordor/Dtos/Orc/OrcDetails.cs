@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Progmasters.Mordor.Dtos.Orc
 {
-    public class OrcDetail
+    public class OrcDetails
     {
         public int Id { get; set; }
         public string Name { get; set; }

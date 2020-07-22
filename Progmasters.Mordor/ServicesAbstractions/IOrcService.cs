@@ -8,11 +8,11 @@ namespace Progmasters.Mordor.ServicesAbstractions
 {
     public interface IOrcService
     {
-        IEnumerable<OrcDetail> GetAll();
-        OrcDetail getOrc(int id);
-        void createOrc(OrcCreateItem orcCreateItem);
-        OrcDetail updateOrc(int id, OrcCreateItem orcCreateItem);
-        bool deleteOrc(int id);
-        OrcFormData getOrcFormData();
+        IEnumerable<OrcDetails> GetAll();
+        OrcDetails GetOrc(int id);
+        void CreateOrc(OrcCreateItem orcCreateItem);
+        OrcDetails UpdateOrc(int id, OrcCreateItem orcCreateItem);
+        bool DeleteOrc(int id);
+        OrcFormData GetOrcFormData();
     }
 }

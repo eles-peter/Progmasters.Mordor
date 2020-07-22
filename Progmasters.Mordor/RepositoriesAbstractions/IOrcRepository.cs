@@ -9,10 +9,10 @@ namespace Progmasters.Mordor.RepositoriesAbstractions
 {
     public interface IOrcRepository
     {
-        List<Orc> getAll();
-        Orc getOrc(int id);
-        void saveOrc(Orc orc);
-        bool deleteOrc(int id);
+        List<Orc> GetAll();
+        Orc GetOrc(int id);
+        void SaveOrc(Orc orc);
+        bool DeleteOrc(int id);
         Orc Update(int id, Orc updatedOrc);
     }
 }

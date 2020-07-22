@@ -7,6 +7,7 @@ using Progmasters.Mordor.Models;
 using Progmasters.Mordor.Dtos.Orc;
 using Progmasters.Mordor.Dtos;
 using Progmasters.Mordor.Repositories.Entities;
+using Progmasters.Mordor.Dtos.Horde;
 
 namespace Progmasters.Mordor
 {
@@ -14,16 +15,23 @@ namespace Progmasters.Mordor
     {
         public AutoMapperProfile()
         {
-            CreateMap<Orc, OrcDetail>();
+            CreateMap<Orc, OrcDetails>();
             CreateMap<OrcCreateItem, Orc>();
             CreateMap<DbOrc, Orc>();
             CreateMap<Orc, DbOrc>();
+
             CreateMap<WeaponType, DbWeapon>();
             CreateMap<DbWeapon, WeaponType>();
             CreateMap<string, OrcRaceType>().
                 ConvertUsing(s => OrcRaceType.Parse(s));
             CreateMap<string, WeaponType>().
                 ConvertUsing(s => WeaponType.Parse(s));
+
+            CreateMap<Horde, HordeDetails>();
+            CreateMap<Horde, HordeListItem>();
+            CreateMap<HordeCreateItem, Horde>();
+            CreateMap<Horde, DbHorde>();
+            CreateMap<DbHorde, Horde>();
         }
             
 

@@ -12,6 +12,8 @@ namespace Progmasters.Mordor.Repositories
         public static void RegisterRepositoryDependencies(this IServiceCollection services)
         {
             services.AddTransient<IOrcRepository, OrcRepository>();
+            services.AddTransient<IHordeRepository, HordeRepository>();
+            
         }
     }
 }

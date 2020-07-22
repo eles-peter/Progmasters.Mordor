@@ -11,8 +11,8 @@ namespace Progmasters.Mordor.RepositoriesAbstractions
     {
         List<Orc> GetAll();
         Orc GetOrc(int id);
-        void SaveOrc(Orc orc);
+        void SaveOrc(Orc orc, int hordeId);
         bool DeleteOrc(int id);
-        Orc Update(int id, Orc updatedOrc);
+        Orc Update(int id, int hordeId, Orc updatedOrc);
     }
 }

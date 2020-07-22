@@ -33,7 +33,9 @@ namespace Progmasters.Mordor.Repositories
 
         public List<Orc> GetAll()
         {
-            List<DbOrc> dbOrcs = context.Orcs.Include(o => o.Weapons).ToList();
+            List<DbOrc> dbOrcs = context.Orcs
+                .Include(o => o.Weapons)
+                .Include(o => o.Horde).ToList();
             return dbOrcs.Select(dbOrc => mapper.Map<Orc>(dbOrc)).ToList();
         }
 
@@ -41,23 +43,50 @@ namespace Progmasters.Mordor.Repositories
         {
             DbOrc dbOrc = context.Orcs
                 .Include(o => o.Weapons)
+                .Include(o => o.Horde)
                 .FirstOrDefault(dbOrc => dbOrc.Id == id);
             return mapper.Map<Orc>(dbOrc);
         }
 
-        public void SaveOrc(Orc orc)
+        public void SaveOrc(Orc orc, int hordeId)
         {
             DbOrc dbOrc = mapper.Map<DbOrc>(orc);
-            context.Orcs.Add(dbOrc);
+
+            DbHorde dbHorde = context.Hordes
+                .Include(horde => horde.Orcs)                
+                .FirstOrDefault(horde => horde.Id == hordeId);
+            if (dbHorde != null)
+            {
+                dbHorde.Orcs.Add(dbOrc);
+            }           
+
             context.SaveChanges();
         }
 
-        public Orc Update(int id, Orc updatedOrc)
+        public Orc Update(int id, int newHordeId, Orc updatedOrc)
         {
-            DbOrc dbOrc = context.Orcs.Include(o => o.Weapons).FirstOrDefault(o => o.Id == id);
+            DbOrc dbOrc = context.Orcs
+                .Include(o => o.Weapons)
+                .Include(o => o.Horde)
+                .ThenInclude(h => h.Orcs)
+                .FirstOrDefault(o => o.Id == id);
             if (dbOrc != null)
             {
+                if (dbOrc.Horde != null)
+                {
+                    dbOrc.Horde.Orcs.Remove(dbOrc);
+                }
+                // A wewapos-t nem mappeli át!!!!!!!!!!!!!
                 context.Entry(dbOrc).CurrentValues.SetValues(mapper.Map<DbOrc>(updatedOrc));
+
+                DbHorde dbHorde = context.Hordes
+                    .Include(horde => horde.Orcs)
+                    .FirstOrDefault(horde => horde.Id == newHordeId);
+
+                if (dbHorde != null)
+                {
+                    dbHorde.Orcs.Add(dbOrc);
+                }
                 context.SaveChanges();
             }
             return mapper.Map<Orc>(dbOrc);

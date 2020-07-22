@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Progmasters.Mordor.Dtos.Horde;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,5 +13,6 @@ namespace Progmasters.Mordor.Dtos.Orc
         public string OrcRaceType { get; set; }
         public int KillCount { get; set; }
         public List<string> Weapons { get; set; }
+        public HordeListItem Horde { get; set; }
     }
 }

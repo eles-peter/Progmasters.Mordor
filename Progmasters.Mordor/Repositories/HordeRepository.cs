@@ -34,7 +34,9 @@ namespace Progmasters.Mordor.Repositories
 
         public List<Horde> GetAll()
         {
-            List<DbHorde> dbHordes = context.Hordes.Include(h => h.Orcs).ToList();
+            List<DbHorde> dbHordes = context.Hordes
+                .Include(h => h.Orcs)
+                .ThenInclude(o => o.Weapons).ToList();
             return dbHordes.Select(dbHorde => mapper.Map<Horde>(dbHorde)).ToList();
         }
 
@@ -42,6 +44,7 @@ namespace Progmasters.Mordor.Repositories
         {
             DbHorde dbHorde = context.Hordes
                 .Include(h => h.Orcs)
+                .ThenInclude(o => o.Weapons)
                 .FirstOrDefault(dbHorde => dbHorde.Id == id);
             return mapper.Map<Horde>(dbHorde);
         }

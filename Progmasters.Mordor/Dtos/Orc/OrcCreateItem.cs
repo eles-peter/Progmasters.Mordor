@@ -14,4 +14,3 @@ namespace Progmasters.Mordor.Dtos.Orc
         public int HordeId { get; set; }
     }
 }
-

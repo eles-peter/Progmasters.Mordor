@@ -10,7 +10,7 @@ using Progmasters.Mordor.ServicesAbstractions;
 
 namespace Progmasters.Mordor.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class HordeController : ControllerBase
     {

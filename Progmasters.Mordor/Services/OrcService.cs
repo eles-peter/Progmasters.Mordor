@@ -29,7 +29,7 @@ namespace Progmasters.Mordor.Services
         public OrcFormData GetOrcFormData()
         {
             return new OrcFormData {
-                Weapons = WeaponType.WeaponTypes.Select(w => w.ToString()).ToList(),
+                Weapons = WeaponType.WeaponTypes.Select(w => w.ToString()).Distinct().ToList(),
                 OrcRaces = OrcRaceType.OrcRaceTypes.Select(o => o.ToString()).ToList(),
                 Hordes = hordeRepository.GetAll()
                 .Select(horde => mapper.Map<HordeListItem>(horde)).ToList()
@@ -39,9 +39,8 @@ namespace Progmasters.Mordor.Services
         public void CreateOrc(OrcCreateItem orcCreateItem)
         {
             Orc orc = mapper.Map<Orc>(orcCreateItem);
-            Horde hordeOfOrc = hordeRepository.GetHorde(orcCreateItem.HordeId);
-            orc.Horde = hordeOfOrc;
-            orcRepository.SaveOrc(orc);
+            int hordeId = orcCreateItem.HordeId;
+            orcRepository.SaveOrc(orc, hordeId);
         }
 
         public bool DeleteOrc(int id)
@@ -66,8 +65,9 @@ namespace Progmasters.Mordor.Services
         {
             Orc orc = mapper.Map<Orc>(orcCreateItem);
             orc.Id = id;
+            int hordeId = orcCreateItem.HordeId;
 
-            Orc updatedOrc = orcRepository.Update(id, orc);
+            Orc updatedOrc = orcRepository.Update(id, hordeId, orc);
             return mapper.Map<OrcDetails>(updatedOrc);
         }
     }
